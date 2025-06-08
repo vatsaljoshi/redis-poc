@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -29,6 +30,12 @@ public class RedisConfig {
 		redisTemplate.setKeySerializer(new StringRedisSerializer()); // key serializer
 		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer()); // value serializer
 		return redisTemplate;
+	}
+	
+	// for rate limiting
+	@Bean
+	public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory connectionFactory) {
+	    return new StringRedisTemplate(connectionFactory);
 	}
 
 }

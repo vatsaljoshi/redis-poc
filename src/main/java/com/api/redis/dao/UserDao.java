@@ -30,7 +30,7 @@ public class UserDao {
 		return redisTemplate.opsForHash().entries(KEY);
 	}
 
-	public void delete(String userId) {
-		redisTemplate.opsForHash().delete(KEY, userId);
+	public Object delete(String userId) {
+		return redisTemplate.opsForHash().delete(KEY, userId);
 	}
 }
